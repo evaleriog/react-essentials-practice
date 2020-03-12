@@ -19,7 +19,7 @@ let bookList = [
     {"title": "Cat's Cradle", "author":"Kurt Vonnegut", "pages":304}
 ];
 
-const Book = ({title, author, pages}) => {
+const Book = ({title="No title provided", author="No author provided", pages=0}) => {
     return(
         <section>
             <h2>{title}</h2>
@@ -91,6 +91,10 @@ class Library extends React.Component{
             </div>
         )
     }
+}
+
+Library.propTypes = {
+    books: PropTypes.array
 }
 
 ReactDOM.render(<Library books={bookList}/>, document.getElementById('root'));
