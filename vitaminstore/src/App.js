@@ -7,6 +7,7 @@ import Card from './components/Card';
 import Loading from './components/Loading';
 import Navigation from "./components/Navigation";
 import Vitamin from './components/Vitamin';
+import ProductDetails from "./components/ProductDetails";
 import data from './data/data.json';
 
 class App extends Component{
@@ -92,6 +93,15 @@ class App extends Component{
                         <Home cards={this.state.cards} />
                     )}/>
                     <Route exact path="/vitamin" component={Vitamin} />
+                    <Route exact path="/product/:id" render={(props) => {
+                        let cardPosition = props.location.pathname.replace('/product/', '');
+                        return(
+                            <ProductDetails
+                                card={this.state.cards[cardPosition]}
+                            />
+                        )
+                    }}
+                    />
                 </Switch>
                 {/*{*/}
                 {/*    this.state.loading ? <Loading /> :*/}
