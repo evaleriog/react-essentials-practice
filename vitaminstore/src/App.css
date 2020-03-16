@@ -18,14 +18,39 @@ html, body{
 }
 
 .static-logo{
-  height: 100px;
+  height: 150px;
   cursor: pointer;
+  position: fixed;
+  margin-right: auto;
+  margin-left: auto;
+  top:20px;
+  left:0;
+  right: 0;
+  z-index: 99;
 }
 
-.animated-logo{
-  height: 100px;
-  animation: App-logo-spin infinite 20s linear;
+.menu{
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  top:145px;
+  left:0;
+  right: 0;
+  font-weight: 800;
+  font-size: 35px;
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.42);
+  cursor: pointer;
+  z-index: 99;
 }
+
+.menu-hidden{
+  visibility: hidden;
+}
+
+/*.animated-logo{*/
+/*  height: 100px;*/
+/*  animation: App-logo-spin infinite 20s linear;*/
+/*}*/
 
 /*.App-logo {*/
 /*  height: 40vmin;*/
@@ -48,15 +73,15 @@ html, body{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
+/*.App-link {*/
+/*  color: #61dafb;*/
+/*}*/
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*@keyframes App-logo-spin {*/
+/*  from {*/
+/*    transform: rotate(0deg);*/
+/*  }*/
+/*  to {*/
+/*    transform: rotate(360deg);*/
+/*  }*/
+/*}*/
