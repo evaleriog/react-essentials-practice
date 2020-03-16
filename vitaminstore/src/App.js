@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import logo from './logo.png';
 import './App.css';
+import Home from './components/Home';
 import Card from './components/Card';
 import Loading from './components/Loading';
 import Navigation from "./components/Navigation";
 import Vitamin from './components/Vitamin';
+import data from './data/data.json';
 
 class App extends Component{
     constructor(props){
@@ -13,31 +15,6 @@ class App extends Component{
         this.state = {
             toggleLogo: true,
             loading: true,
-            cards: [
-                {
-                    id:0,
-                    animation: 'card'
-                },
-                {
-                    id:1,
-                    animation: 'card'
-                },
-                {
-                    id:2,
-                    animation: 'card'
-                },
-                {
-                    id:3,
-                    animation: 'card'
-                },
-                {
-                    id:4,
-                    animation: 'card'
-                },
-                {
-                    id:5,
-                    animation: 'card'
-                }]
         };
         this.toggleLogo = this.toggleLogo.bind(this);
         // this.clickCard = this.clickCard.bind(this);
@@ -45,6 +22,11 @@ class App extends Component{
         this.closeNav = this.closeNav.bind(this);
         this.showFront = this.showFront.bind(this);
         this.showBack = this.showBack.bind(this);
+    }
+    componentWillMount() {
+        this.setState({
+            cards: data,
+        });
     }
 
     componentDidMount() {
@@ -57,16 +39,6 @@ class App extends Component{
         })))
 
     }
-
-    // clickCard(card){
-    //     let cards = this.state.cards;
-    //     cards[card.id].animation = "card animated zoomOut";
-    //     console.log(cards);
-    //
-    //     this.setState({
-    //         cards,
-    //     });
-    // }
 
     showBack(card){
         let cards = this.state.cards;
@@ -116,25 +88,15 @@ class App extends Component{
                     <Navigation closeNav={this.closeNav} />
                 </header>
                 <Switch>
-                    <Route exact path="/" />
+                    <Route exact path="/" render={(props) => (
+                        <Home cards={this.state.cards} />
+                    )}/>
                     <Route exact path="/vitamin" component={Vitamin} />
                 </Switch>
-                {
-                    this.state.loading ? <Loading /> :
-                        <div className="Grid animated bounceInUp">
-                            {
-                                this.state.cards.map((card) => (
-                                    <Card
-                                        duration={150}
-                                        key={card.id}
-                                        card={card}
-                                        showBack={this.showBack}
-                                        showFront={this.showFront}
-                                    />
-                                ))
-                            }
-                        </div>
-                }
+                {/*{*/}
+                {/*    this.state.loading ? <Loading /> :*/}
+                {/*        <Home />*/}
+                {/*}*/}
 
             </div>
         </Router>
