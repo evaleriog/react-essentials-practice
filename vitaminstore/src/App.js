@@ -105,6 +105,10 @@ class App extends Component{
                  onMouseLeave={this.toggleLogo}
                  onClick={this.openNav}
             />
+              <h1 className={this.state.toggleLogo ? 'menu-hidden' : "menu animated bounceInDown"}
+              onClick={this.openNav}>
+                  Menu
+              </h1>
             <Navigation closeNav={this.closeNav} />
           </header>
 
