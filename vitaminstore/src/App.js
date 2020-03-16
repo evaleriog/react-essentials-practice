@@ -37,9 +37,11 @@ class App extends Component{
                 }]
         };
         this.toggleLogo = this.toggleLogo.bind(this);
-        this.clickCard = this.clickCard.bind(this);
+        // this.clickCard = this.clickCard.bind(this);
         this.openNav = this.openNav.bind(this);
         this.closeNav = this.closeNav.bind(this);
+        this.showFront = this.showFront.bind(this);
+        this.showBack = this.showBack.bind(this);
     }
 
     componentDidMount() {
@@ -53,14 +55,34 @@ class App extends Component{
 
     }
 
-    clickCard(card){
+    // clickCard(card){
+    //     let cards = this.state.cards;
+    //     cards[card.id].animation = "card animated zoomOut";
+    //     console.log(cards);
+    //
+    //     this.setState({
+    //         cards,
+    //     });
+    // }
+
+    showBack(card){
         let cards = this.state.cards;
-        cards[card.id].animation = "card animated zoomOut";
+        cards[card.id].animation = "card card-flip";
         console.log(cards);
 
         this.setState({
             cards,
-        })
+        });
+    }
+
+    showFront(card){
+        let cards = this.state.cards;
+        cards[card.id].animation = "card";
+        console.log(cards);
+
+        this.setState({
+            cards,
+        });
     }
 
     openNav(){
@@ -88,10 +110,16 @@ class App extends Component{
 
             {
                 this.state.loading ? <Loading /> :
-                    <div className="Grid">
+                    <div className="Grid animated bounceInUp">
                         {
                             this.state.cards.map((card) => (
-                                <Card duration={150} key={card.id} card={card} clickCard={this.clickCard}/>
+                                <Card
+                                    duration={150}
+                                    key={card.id}
+                                    card={card}
+                                    showBack={this.showBack}
+                                    showFront={this.showFront}
+                                />
                             ))
                         }
                     </div>
