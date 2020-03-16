@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 // var style = {
 //     backgroundColor: 'orange',
@@ -95,6 +96,6 @@ class Library extends React.Component{
 
 Library.propTypes = {
     books: PropTypes.array
-}
+};
 
 ReactDOM.render(<Library books={bookList}/>, document.getElementById('root'));
