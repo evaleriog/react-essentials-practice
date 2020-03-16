@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import logo from './logo.png';
 import './App.css';
 import Card from './components/Card';
 import Loading from './components/Loading';
 import Navigation from "./components/Navigation";
+import Vitamin from './components/Vitamin';
+
 class App extends Component{
     constructor(props){
         super(props);
@@ -95,41 +98,47 @@ class App extends Component{
 
   render(){
     return(
-        <div className="App">
-          <header className="App-header">
-            <img src={logo}
-                 className={this.state.toggleLogo ? 'static-logo' : 'animated-logo'}
-                 alt="logo"
-                 // onClick={this.toggleLogo}
-                 onMouseEnter={this.toggleLogo}
-                 onMouseLeave={this.toggleLogo}
-                 onClick={this.openNav}
-            />
-              <h1 className={this.state.toggleLogo ? 'menu-hidden' : "menu animated bounceInDown"}
-              onClick={this.openNav}>
-                  Menu
-              </h1>
-            <Navigation closeNav={this.closeNav} />
-          </header>
+        <Router>
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo}
+                         className={this.state.toggleLogo ? 'static-logo' : 'animated-logo'}
+                         alt="logo"
+                        // onClick={this.toggleLogo}
+                         onMouseEnter={this.toggleLogo}
+                         onMouseLeave={this.toggleLogo}
+                         onClick={this.openNav}
+                    />
+                    <h1 className={this.state.toggleLogo ? 'menu-hidden' : "menu animated bounceInDown"}
+                        onClick={this.openNav}>
+                        Menu
+                    </h1>
+                    <Navigation closeNav={this.closeNav} />
+                </header>
+                <Switch>
+                    <Route exact path="/" />
+                    <Route exact path="/vitamin" component={Vitamin} />
+                </Switch>
+                {
+                    this.state.loading ? <Loading /> :
+                        <div className="Grid animated bounceInUp">
+                            {
+                                this.state.cards.map((card) => (
+                                    <Card
+                                        duration={150}
+                                        key={card.id}
+                                        card={card}
+                                        showBack={this.showBack}
+                                        showFront={this.showFront}
+                                    />
+                                ))
+                            }
+                        </div>
+                }
 
-            {
-                this.state.loading ? <Loading /> :
-                    <div className="Grid animated bounceInUp">
-                        {
-                            this.state.cards.map((card) => (
-                                <Card
-                                    duration={150}
-                                    key={card.id}
-                                    card={card}
-                                    showBack={this.showBack}
-                                    showFront={this.showFront}
-                                />
-                            ))
-                        }
-                    </div>
-            }
+            </div>
+        </Router>
 
-        </div>
     )
   }
 }
